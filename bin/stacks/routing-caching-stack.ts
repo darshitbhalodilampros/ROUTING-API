@@ -1,4 +1,4 @@
-import { Protocol } from 'routersdk18'
+import { Protocol } from 'lampros-router'
 import * as cdk from 'aws-cdk-lib'
 import { Duration } from 'aws-cdk-lib'
 import * as aws_cloudwatch from 'aws-cdk-lib/aws-cloudwatch'

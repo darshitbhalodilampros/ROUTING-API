@@ -1,9 +1,9 @@
-import { Protocol } from 'routersdk18'
+import { Protocol } from 'lampros-router'
 import {
   ChainId,
   // V2SubgraphProvider,
   V3SubgraphProvider,
-} from 'smartorderrouter18'
+} from 'lampros-sor'
 
 export const chainProtocols = [
   // V3.

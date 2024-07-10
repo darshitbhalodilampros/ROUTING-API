@@ -6,17 +6,17 @@ import {
   IRouteCachingProvider,
   log,
   routeToString,
-} from 'smartorderrouter18'
+} from 'lampros-sor'
 import { DynamoDB } from 'aws-sdk'
-import { Currency, CurrencyAmount, Token, TradeType } from 'sdkcore18'
-import { Protocol } from 'routersdk18'
+import { Currency, CurrencyAmount, Token, TradeType } from 'lampros-core'
+import { Protocol } from 'lampros-router'
 import { CACHED_ROUTES_CONFIGURATION } from './cached-routes-configuration'
 import { PairTradeTypeChainId } from './model/pair-trade-type-chain-id'
 import { CachedRoutesMarshaller } from './marshalling/cached-routes-marshaller'
 import { CachedRoutesStrategy } from './model/cached-routes-strategy'
 import { ProtocolsBucketBlockNumber } from './model/protocols-bucket-block-number'
 import { CachedRoutesBucket } from './model'
-import { V3Route } from 'smartorderrouter18/build/main/routers'
+import { V3Route } from 'lampros-sor/build/main/routers'
 
 interface ConstructorParams {
   /**

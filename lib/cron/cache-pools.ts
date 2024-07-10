@@ -1,5 +1,5 @@
-import { Protocol } from 'routersdk18'
-import { ChainId, setGlobalLogger } from 'smartorderrouter18'
+import { Protocol } from 'lampros-router'
+import { ChainId, setGlobalLogger } from 'lampros-sor'
 import { EventBridgeEvent, ScheduledHandler } from 'aws-lambda'
 import { S3 } from 'aws-sdk'
 import { default as bunyan, default as Logger } from 'bunyan'

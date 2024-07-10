@@ -1,4 +1,4 @@
-import { Protocol } from 'routersdk18'
+import { Protocol } from 'lampros-router'
 
 interface ProtocolsBucketBlockNumberArgs {
   protocols: Protocol[]

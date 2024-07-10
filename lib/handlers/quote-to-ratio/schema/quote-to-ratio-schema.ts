@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi'
-import { TickMath } from 'v3sdk18'
+import { TickMath } from 'lampros-v3'
 import { SUPPORTED_CHAINS } from '../../injector-sor'
 import { QuoteResponse, QuoteResponseSchemaJoi, TokenInRoute } from '../../schema'
 

@@ -1,4 +1,4 @@
-import { Token } from 'sdkcore18'
+import { Token } from 'lampros-core'
 import {
   CachingGasStationProvider,
   CachingTokenListProvider,
@@ -31,7 +31,7 @@ import {
   // V2QuoteProvider,
   V3PoolProvider,
   IRouteCachingProvider,
-} from 'smartorderrouter18'
+} from 'lampros-sor'
 import { TokenList } from 'udonswap-token-lists'
 import { default as bunyan, default as Logger } from 'bunyan'
 import { ethers } from 'ethers'

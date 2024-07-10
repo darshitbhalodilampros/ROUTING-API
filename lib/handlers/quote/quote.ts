@@ -1,8 +1,8 @@
 import Joi from '@hapi/joi'
-import { Protocol } from 'routersdk18'
-import { UNIVERSAL_ROUTER_ADDRESS } from 'universalroutersdk18'
+import { Protocol } from 'lampros-router'
+import { UNIVERSAL_ROUTER_ADDRESS } from 'lampros-universal'
 import { PermitSingle } from '@uniswap/permit2-sdk'
-import { Currency, CurrencyAmount, TradeType } from 'sdkcore18'
+import { Currency, CurrencyAmount, TradeType } from 'lampros-core'
 import {
   AlphaRouterConfig,
   IRouter,
@@ -14,8 +14,8 @@ import {
   SimulationStatus,
   IMetric,
   ChainId,
-} from 'smartorderrouter18'
-import { Pool } from 'v3sdk18'
+} from 'lampros-sor'
+import { Pool } from 'lampros-v3'
 import JSBI from 'jsbi'
 import _ from 'lodash'
 import { APIGLambdaHandler, ErrorResponse, HandleRequestParams, Response } from '../handler'

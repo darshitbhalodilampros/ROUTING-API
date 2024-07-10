@@ -1,6 +1,6 @@
-import { Currency, CurrencyAmount, TradeType } from 'sdkcore18'
+import { Currency, CurrencyAmount, TradeType } from 'lampros-core'
 import { CachedRoutesBucket } from './cached-routes-bucket'
-import { CacheMode, ChainId } from 'smartorderrouter18'
+import { CacheMode, ChainId } from 'lampros-sor'
 
 interface CachedRoutesStrategyArgs {
   pair: string

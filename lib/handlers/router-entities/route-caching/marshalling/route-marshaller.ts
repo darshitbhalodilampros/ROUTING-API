@@ -1,8 +1,8 @@
-import { V3Route } from 'smartorderrouter18/build/main/routers'
-import { Protocol } from 'routersdk18'
+import { V3Route } from 'lampros-sor/build/main/routers'
+import { Protocol } from 'lampros-router'
 import { MarshalledToken, TokenMarshaller } from './token-marshaller'
 import { MarshalledPool, PoolMarshaller } from './pool-marshaller'
-import { Pool } from 'v3sdk18'
+import { Pool } from 'lampros-v3'
 
 // export interface MarshalledV1Route {
 //   protocol: Protocol

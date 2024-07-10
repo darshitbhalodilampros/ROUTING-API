@@ -1,4 +1,4 @@
-import { ChainId, IV3SubgraphProvider, log, V3SubgraphPool, V3SubgraphProvider } from 'smartorderrouter18'
+import { ChainId, IV3SubgraphProvider, log, V3SubgraphPool, V3SubgraphProvider } from 'lampros-sor'
 import { S3 } from 'aws-sdk'
 import _ from 'lodash'
 import NodeCache from 'node-cache'

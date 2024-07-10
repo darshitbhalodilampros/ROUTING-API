@@ -1,4 +1,4 @@
-import { ChainId, SUPPORTED_CHAINS } from 'smartorderrouter18'
+import { ChainId, SUPPORTED_CHAINS } from 'lampros-sor'
 import * as cdk from 'aws-cdk-lib'
 import { CfnOutput, Duration } from 'aws-cdk-lib'
 import * as aws_apigateway from 'aws-cdk-lib/aws-apigateway'

@@ -5,7 +5,7 @@ import {
   ITokenProvider,
   log,
   NodeJSCache,
-} from 'smartorderrouter18'
+} from 'lampros-sor'
 import { TokenList } from 'udonswap-token-lists'
 import S3 from 'aws-sdk/clients/s3'
 import NodeCache from 'node-cache'

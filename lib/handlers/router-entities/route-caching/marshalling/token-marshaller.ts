@@ -1,4 +1,4 @@
-import { Token } from 'sdkcore18'
+import { Token } from 'lampros-core'
 
 export interface MarshalledToken {
   chainId: number

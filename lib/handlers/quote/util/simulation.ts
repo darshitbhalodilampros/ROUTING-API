@@ -1,4 +1,4 @@
-import { SimulationStatus } from 'smartorderrouter18'
+import { SimulationStatus } from 'lampros-sor'
 import Logger from 'bunyan'
 
 export const simulationStatusToString = (simulationStatus: SimulationStatus | undefined, log: Logger) => {

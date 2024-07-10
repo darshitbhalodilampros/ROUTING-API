@@ -6826,6 +6826,82 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
+lampros-core@0.0.1, lampros-core@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/lampros-core/-/lampros-core-0.0.1.tgz#89d39f33ca29ea961f5c165025214fdb0202da73"
+  integrity sha512-CTS1V+oW6c8Qpm8nKA387DToDbuojaseu/Z2yfDVZTVReHS86mc7oBv0jdmVuz+g8SVKFeTvDlSDSxBCEp4R5Q==
+  dependencies:
+    "@ethersproject/address" "^5.0.2"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.4"
+    tiny-invariant "^1.1.0"
+    toformat "^2.0.0"
+
+lampros-router@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/lampros-router/-/lampros-router-0.0.1.tgz#40e1f47a212c39a8f17e1d08de313ac78569f125"
+  integrity sha512-VU5TbjNw/rIgWMQlFBMHTIaMqSz/MEtmMe98Gzawf9USY1ov6dgXTcEt40OZIq4wFp31ar48xnQ1NLFXnhbimg==
+  dependencies:
+    "@ethersproject/abi" "^5.5.0"
+    "@uniswap/swap-router-contracts" "^1.1.0"
+    lampros-core "^0.0.1"
+    lampros-v3 "^0.0.1"
+
+lampros-sor@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/lampros-sor/-/lampros-sor-0.0.1.tgz#b7f884c97556ee2ff81d9f2e0631490d76fc127a"
+  integrity sha512-OgMndJe8kNNDnCOxk/IAsqioC0W++NYs8jDfDkXwmdfZ/waiLlw0BZKogP21mIIX9+pQ92/nEjsr6pkTXLjrYQ==
+  dependencies:
+    "@uniswap/permit2-sdk" "^1.2.0"
+    "@uniswap/swap-router-contracts" "^1.3.1"
+    "@uniswap/universal-router" "^1.6.0"
+    async-retry "^1.3.1"
+    await-timeout "^1.1.1"
+    axios "^0.21.1"
+    bunyan "^1.8.15"
+    bunyan-blackhole "^1.1.1"
+    ethers "^5.7.2"
+    graphql "^15.5.0"
+    graphql-request "^3.4.0"
+    lampros-core "^0.0.1"
+    lampros-router "0.0.1"
+    lampros-universal "0.0.1"
+    lampros-v3 "0.0.1"
+    lodash "^4.17.21"
+    mnemonist "^0.38.3"
+    node-cache "^5.1.2"
+    stats-lite "^2.2.0"
+    udonswap-default-token-list "1.0.0"
+    udonswap-token-lists "1.0.0"
+
+lampros-universal@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/lampros-universal/-/lampros-universal-0.0.1.tgz#2aabea914020b9cfd3e2888315ea7ab24e4df63f"
+  integrity sha512-IP9RTIb9vRWLcacVHbAFtK7FZUz6yONSjc5Mwn48xXPlqHWljhbdJtrX2huzTgK2e+uiJSA8n/zSdmsz3S0Ayg==
+  dependencies:
+    "@uniswap/permit2-sdk" "^1.2.0"
+    "@uniswap/universal-router" "^1.6.0"
+    bignumber.js "^9.0.2"
+    ethers "^5.3.1"
+    lampros-core "0.0.1"
+    lampros-router "0.0.1"
+    lampros-v3 "0.0.1"
+
+lampros-v3@0.0.1, lampros-v3@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/lampros-v3/-/lampros-v3-0.0.1.tgz#bf64c1692acde0c15e0baeef1db2b2104df688a9"
+  integrity sha512-CKFCVLHrZmc93/jHwroLhDGDZ7SQylHnLxJqlmNXQLhaS/3tw3ZuZ/66TClEGKmxPC0yZ6p7WzEy8n4ThaZuIQ==
+  dependencies:
+    "@ethersproject/abi" "^5.0.12"
+    "@ethersproject/solidity" "^5.0.9"
+    "@uniswap/swap-router-contracts" "^1.2.1"
+    "@uniswap/v3-periphery" "^1.1.1"
+    "@uniswap/v3-staker" "1.0.0"
+    lampros-core "^0.0.1"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+
 lcid@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lcid/-/lcid-1.0.0.tgz#308accafa0bc483a3867b4b6f2b9506251d1b835"
@@ -8841,16 +8917,6 @@ rlp@^2.0.0, rlp@^2.2.1, rlp@^2.2.2, rlp@^2.2.3, rlp@^2.2.4:
   dependencies:
     bn.js "^5.2.0"
 
-routersdk18@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/routersdk18/-/routersdk18-0.0.1.tgz#7254e94b58ca4cfa166b4d02430eb2fe13816e7f"
-  integrity sha512-BXnFMPN5N/z6vEH7aftbDLhjJUrPx7YrKdy/ToDXuoXfMDMoIQUiWd85gEOv8v8y/L+ndQZ1NX2suPmgmQI35A==
-  dependencies:
-    "@ethersproject/abi" "^5.5.0"
-    "@uniswap/swap-router-contracts" "^1.1.0"
-    sdkcore18 "0.0.1"
-    v3sdk18 "0.0.1"
-
 run-parallel@^1.1.9:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.2.0.tgz#66d1368da7bdf921eb9d95bd1a9229e7f21a43ee"
@@ -8944,18 +9010,6 @@ scryptsy@^1.2.1:
   integrity sha512-aldIRgMozSJ/Gl6K6qmJZysRP82lz83Wb42vl4PWN8SaLFHIaOzLPc9nUUW2jQN88CuGm5q5HefJ9jZ3nWSmTw==
   dependencies:
     pbkdf2 "^3.0.3"
-
-sdkcore18@0.0.1, sdkcore18@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/sdkcore18/-/sdkcore18-0.0.1.tgz#eac46f92a61c0b81ee5d47f7d77ae83cf74c346d"
-  integrity sha512-DTCGkRC4THAOvI1LH2Ji9PAy2jfRnvswaLmjAdF4X1d3sDdZdlH3zH5gE/NnGar6HYoZVOTSV3VlOif69RIv1g==
-  dependencies:
-    "@ethersproject/address" "^5.0.2"
-    big.js "^5.2.2"
-    decimal.js-light "^2.5.0"
-    jsbi "^3.1.4"
-    tiny-invariant "^1.1.0"
-    toformat "^2.0.0"
 
 secp256k1@^4.0.1:
   version "4.0.3"
@@ -9203,33 +9257,6 @@ slice-ansi@^4.0.0:
     ansi-styles "^4.0.0"
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
-
-smartorderrouter18@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/smartorderrouter18/-/smartorderrouter18-0.0.1.tgz#fe38dc384d98bc5c285bc1244d1c91d6ada40b9d"
-  integrity sha512-iH0iqwgjgjaOeN1bAZTmGwMjxXW/rBUvQjZRMT6SFdwFYfwUskbPQ1zguOK8LFIJPZQqSVcCGzJxKFIUjDYsqw==
-  dependencies:
-    "@uniswap/permit2-sdk" "^1.2.0"
-    "@uniswap/swap-router-contracts" "^1.3.1"
-    "@uniswap/universal-router" "^1.6.0"
-    async-retry "^1.3.1"
-    await-timeout "^1.1.1"
-    axios "^0.21.1"
-    bunyan "^1.8.15"
-    bunyan-blackhole "^1.1.1"
-    ethers "^5.7.2"
-    graphql "^15.5.0"
-    graphql-request "^3.4.0"
-    lodash "^4.17.21"
-    mnemonist "^0.38.3"
-    node-cache "^5.1.2"
-    routersdk18 "0.0.1"
-    sdkcore18 "^0.0.1"
-    stats-lite "^2.2.0"
-    udonswap-default-token-list "1.0.0"
-    udonswap-token-lists "1.0.0"
-    universalroutersdk18 "0.0.1"
-    v3sdk18 "0.0.1"
 
 smtp-address-parser@^1.0.3:
   version "1.0.10"
@@ -10164,19 +10191,6 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.1.tgz#168efc2180964e6386d061e094df61afe239b18d"
   integrity sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==
 
-universalroutersdk18@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/universalroutersdk18/-/universalroutersdk18-0.0.1.tgz#985c6cdc569f06d518504ec936b96282cb7e9c20"
-  integrity sha512-tlXXB3oQtsSZ0ZUihcN8zFS3El7pL+KbrPrNIPy+Hm2ykvCdeOHTRPdGVjc+hX+nadLcqu306JyXzA51lRP1VA==
-  dependencies:
-    "@uniswap/permit2-sdk" "^1.2.0"
-    "@uniswap/universal-router" "^1.6.0"
-    bignumber.js "^9.0.2"
-    ethers "^5.3.1"
-    routersdk18 "0.0.1"
-    sdkcore18 "0.0.1"
-    v3sdk18 "0.0.1"
-
 unorm@^1.3.3:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/unorm/-/unorm-1.6.0.tgz#029b289661fba714f1a9af439eb51d9b16c205af"
@@ -10310,20 +10324,6 @@ uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
-
-v3sdk18@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/v3sdk18/-/v3sdk18-0.0.1.tgz#0893d8f7eb9c5aa239c9b95b6a1a76dff083ceb7"
-  integrity sha512-6dammMBpokpUFCDmPeM1Q5zUJG6wYTRJ/dn/3forl5FIVmKgWTjHESVFnDCl01QopbNhLIHpw5aVgesCIwCBjw==
-  dependencies:
-    "@ethersproject/abi" "^5.0.12"
-    "@ethersproject/solidity" "^5.0.9"
-    "@uniswap/swap-router-contracts" "^1.2.1"
-    "@uniswap/v3-periphery" "^1.1.1"
-    "@uniswap/v3-staker" "1.0.0"
-    sdkcore18 "0.0.1"
-    tiny-invariant "^1.1.0"
-    tiny-warning "^1.0.3"
 
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"

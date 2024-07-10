@@ -1,4 +1,4 @@
-import { IMetric, MetricLoggerUnit } from 'smartorderrouter18'
+import { IMetric, MetricLoggerUnit } from 'lampros-sor'
 import { MetricsLogger as AWSEmbeddedMetricsLogger } from 'aws-embedded-metrics'
 
 export class AWSMetricsLogger implements IMetric {

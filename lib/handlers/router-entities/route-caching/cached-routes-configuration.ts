@@ -1,5 +1,5 @@
-import { TradeType } from 'sdkcore18'
-import { CacheMode, ChainId } from 'smartorderrouter18'
+import { TradeType } from 'lampros-core'
+import { CacheMode, ChainId } from 'lampros-sor'
 import { CachedRoutesStrategy } from './model/cached-routes-strategy'
 import { PairTradeTypeChainId } from './model/pair-trade-type-chain-id'
 import { CachedRoutesBucket } from './model/cached-routes-bucket'

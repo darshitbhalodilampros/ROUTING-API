@@ -1,5 +1,5 @@
-import { CachedRoute } from 'smartorderrouter18'
-import { V3Route } from 'smartorderrouter18/build/main/routers'
+import { CachedRoute } from 'lampros-sor'
+import { V3Route } from 'lampros-sor/build/main/routers'
 import { MarshalledRoute, RouteMarshaller } from './route-marshaller'
 
 export interface MarshalledCachedRoute {

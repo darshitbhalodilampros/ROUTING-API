@@ -1,4 +1,4 @@
-import { Currency, Percent } from 'sdkcore18'
+import { Currency, Percent } from 'lampros-core'
 import {
   AlphaRouterConfig,
   ChainId,
@@ -7,7 +7,7 @@ import {
   // MapWithLowerCaseKey,
   NATIVE_NAMES_BY_ID,
   nativeOnChain,
-} from 'smartorderrouter18'
+} from 'lampros-sor'
 import Logger from 'bunyan'
 
 export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterConfig => {

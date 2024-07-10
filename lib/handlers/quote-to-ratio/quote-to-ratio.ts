@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi'
-import { CondensedAddLiquidityOptions, Protocol } from 'routersdk18'
-import { Currency, CurrencyAmount, Fraction } from 'sdkcore18'
+import { CondensedAddLiquidityOptions, Protocol } from 'lampros-router'
+import { Currency, CurrencyAmount, Fraction } from 'lampros-core'
 import {
   AlphaRouterConfig,
   ISwapToRatio,
@@ -10,8 +10,8 @@ import {
   SwapAndAddOptions,
   SwapToRatioStatus,
   SwapType,
-} from 'smartorderrouter18'
-import { Position } from 'v3sdk18'
+} from 'lampros-sor'
+import { Position } from 'lampros-v3'
 import JSBI from 'jsbi'
 import { APIGLambdaHandler, ErrorResponse, HandleRequestParams, Response } from '../handler'
 import { ContainerInjected, RequestInjected } from '../injector-sor'

@@ -7,7 +7,7 @@ import {
   setGlobalLogger,
   setGlobalMetric,
   V3HeuristicGasModelFactory,
-} from 'smartorderrouter18'
+} from 'lampros-sor'
 import { MetricsLogger } from 'aws-embedded-metrics'
 import { APIGatewayProxyEvent, Context } from 'aws-lambda'
 import { default as bunyan, default as Logger } from 'bunyan'

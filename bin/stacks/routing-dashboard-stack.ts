@@ -1,4 +1,4 @@
-import { ChainId } from 'smartorderrouter18'
+import { ChainId } from 'lampros-sor'
 import * as cdk from 'aws-cdk-lib'
 import * as aws_cloudwatch from 'aws-cdk-lib/aws-cloudwatch'
 import { Construct } from 'constructs'

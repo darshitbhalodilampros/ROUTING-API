@@ -1,5 +1,5 @@
-import { TradeType } from 'sdkcore18'
-import { CachedRoutes, ChainId } from 'smartorderrouter18'
+import { TradeType } from 'lampros-core'
+import { CachedRoutes, ChainId } from 'lampros-sor'
 
 interface PairTradeTypeChainIdArgs {
   tokenIn: string

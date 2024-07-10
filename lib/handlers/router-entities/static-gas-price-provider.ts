@@ -1,4 +1,4 @@
-import { GasPrice, IGasPriceProvider } from 'smartorderrouter18'
+import { GasPrice, IGasPriceProvider } from 'lampros-sor'
 import { BigNumber } from 'ethers'
 
 export class StaticGasPriceProvider implements IGasPriceProvider {

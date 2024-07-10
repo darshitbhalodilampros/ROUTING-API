@@ -1,7 +1,7 @@
-import { Pool } from 'v3sdk18'
-import { FeeAmount } from 'v3sdk18/dist/constants'
+import { Pool } from 'lampros-v3'
+import { FeeAmount } from 'lampros-v3/dist/constants'
 import { MarshalledToken, TokenMarshaller } from './token-marshaller'
-import { Protocol } from 'routersdk18'
+import { Protocol } from 'lampros-router'
 
 export interface MarshalledPool {
   protocol: Protocol

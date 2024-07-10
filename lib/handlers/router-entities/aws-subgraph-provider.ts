@@ -1,4 +1,4 @@
-import { Protocol } from 'routersdk18'
+import { Protocol } from 'lampros-router'
 import {
   ChainId,
   // IV2SubgraphProvider,
@@ -6,7 +6,7 @@ import {
   log,
   // V2SubgraphPool,
   V3SubgraphPool,
-} from 'smartorderrouter18'
+} from 'lampros-sor'
 import { S3 } from 'aws-sdk'
 import NodeCache from 'node-cache'
 import { S3_POOL_CACHE_KEY } from '../../util/pool-cache-key'

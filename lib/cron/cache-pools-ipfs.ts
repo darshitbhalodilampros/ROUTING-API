@@ -1,5 +1,5 @@
 import pinataSDK from '@pinata/sdk'
-import { ID_TO_NETWORK_NAME } from 'smartorderrouter18'
+import { ID_TO_NETWORK_NAME } from 'lampros-sor'
 import { EventBridgeEvent, ScheduledHandler } from 'aws-lambda'
 import { Route53, STS } from 'aws-sdk'
 import { default as bunyan, default as Logger } from 'bunyan'

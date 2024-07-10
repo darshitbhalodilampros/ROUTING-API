@@ -1,4 +1,4 @@
-import { CacheMode } from 'smartorderrouter18'
+import { CacheMode } from 'lampros-sor'
 
 interface CachedRoutesBucketsArgs {
   /**

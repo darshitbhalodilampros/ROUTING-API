@@ -1,7 +1,7 @@
-import { CachedRoutes } from 'smartorderrouter18'
-import { ChainId } from 'smartorderrouter18/build/main/util'
-import { TradeType } from 'sdkcore18'
-import { Protocol } from 'routersdk18'
+import { CachedRoutes } from 'lampros-sor'
+import { ChainId } from 'lampros-sor/build/main/util'
+import { TradeType } from 'lampros-core'
+import { Protocol } from 'lampros-router'
 import { MarshalledToken, TokenMarshaller } from './token-marshaller'
 import { CachedRouteMarshaller, MarshalledCachedRoute } from './cached-route-marshaller'
 

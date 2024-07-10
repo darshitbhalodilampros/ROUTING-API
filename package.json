@@ -1,5 +1,5 @@
 {
-  "name": "routingapi18",
+  "name": "lampros-routing",
   "version": "0.0.1",
   "bin": {
     "app": "./dist/bin/app.js"
@@ -69,12 +69,12 @@
     "@middy/validator": "^2.4.1",
     "@pinata/sdk": "^1.1.23",
     "udonswap-default-token-list": "1.0.0",
-    "routersdk18": "0.0.1",
-    "sdkcore18": "0.0.1",
-    "smartorderrouter18": "0.0.1",
-    "universalroutersdk18": "0.0.1",
+    "lampros-router": "0.0.1",
+    "lampros-core": "0.0.1",
+    "lampros-sor": "0.0.1",
+    "lampros-universal": "0.0.1",
     "@uniswap/v3-periphery": "^1.4.4",
-    "v3sdk18": "0.0.1",
+    "lampros-v3": "0.0.1",
     "@typechain/ethers-v5": "^7.0.1",
     "@types/async-retry": "^1.4.2",
     "@types/chai-subset": "^1.3.3",

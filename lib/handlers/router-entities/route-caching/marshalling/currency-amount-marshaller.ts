@@ -1,4 +1,4 @@
-import { CurrencyAmount, Token } from 'sdkcore18'
+import { CurrencyAmount, Token } from 'lampros-core'
 import { MarshalledToken, TokenMarshaller } from './token-marshaller'
 
 export interface MarshalledCurrencyAmount {

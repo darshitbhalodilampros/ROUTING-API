@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi'
-import { MethodParameters } from 'smartorderrouter18'
+import { MethodParameters } from 'lampros-sor'
 
 export type TokenInRoute = {
   address: string
