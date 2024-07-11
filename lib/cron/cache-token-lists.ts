@@ -3,7 +3,7 @@ import { S3 } from 'aws-sdk'
 import axios from 'axios'
 import { default as bunyan, default as Logger } from 'bunyan'
 
-const TOKEN_LISTS = ['https://tokenlist-api.vercel.app/v3-tokens']
+const TOKEN_LISTS = ['https://udonswap-tokenlist.vercel.app/v3-tokens']
 
 const handler: ScheduledHandler = async (event: EventBridgeEvent<string, void>) => {
   const log: Logger = bunyan.createLogger({

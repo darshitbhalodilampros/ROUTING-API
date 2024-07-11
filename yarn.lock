@@ -6848,10 +6848,10 @@ lampros-router@0.0.1:
     lampros-core "^0.0.1"
     lampros-v3 "^0.0.1"
 
-lampros-sor@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/lampros-sor/-/lampros-sor-0.0.5.tgz#fde7241372921e00a970f37657db777f8bcf0ee1"
-  integrity sha512-wRqlXIZQcmPxgGIHrZ4QH6ZxVWmxeSJ1SEUlxKmvZHOq8C3bI74jVI9sF5tPLwtKRiejQg7D5TMHNPK11gKlQw==
+lampros-sor@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/lampros-sor/-/lampros-sor-0.0.6.tgz#1993dce009e0b59b6294b4e8dfc68ee1cde750e2"
+  integrity sha512-mteawwNbelRpMPhiLF0DsCnGcAElZyAuJ95jtUQ40qX6b68UIAEPFzSDf9tYpsW+0TgWHZyK9n2+N/2jl+2l1A==
   dependencies:
     "@uniswap/permit2-sdk" "^1.2.0"
     "@uniswap/swap-router-contracts" "^1.3.1"
