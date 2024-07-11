@@ -33,7 +33,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
     const quoteId = requestId.substring(0, 5)
     const logLevel = bunyan.INFO
 
-    const { tokenInAddress, tokenInChainId, tokenOutAddress, amount, type, algorithm, gasPriceWei } = requestQueryParams
+    const { tokenInAddress, tokenInChainId, tokenOutAddress, amount, type, algorithm, gasPriceWei, gasToken } = requestQueryParams
 
     log = log.child({
       serializers: bunyan.stdSerializers,
@@ -46,6 +46,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
       amount,
       type,
       algorithm,
+      gasToken
     })
     setGlobalLogger(log)
 
@@ -76,6 +77,8 @@ export class QuoteHandlerInjector extends InjectorSOR<
       // v2PoolProvider,
       // v2QuoteProvider,
       // v2SubgraphProvider,
+      tokenValidatorProvider,
+      tokenPropertiesProvider,
       gasPriceProvider: gasPriceProviderOnChain,
       simulator,
       routeCachingProvider,
@@ -108,6 +111,8 @@ export class QuoteHandlerInjector extends InjectorSOR<
           // v2SubgraphProvider,
           simulator,
           routeCachingProvider,
+          tokenValidatorProvider,
+          tokenPropertiesProvider
         })
         break
     }

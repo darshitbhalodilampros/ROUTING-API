@@ -6,31 +6,34 @@ import {
   CachingV3PoolProvider,
   ChainId,
   EIP1559GasPriceProvider,
-  FallbackTenderlySimulator,
-  TenderlySimulator,
   EthEstimateGasSimulator,
+  // EthEstimateGasSimulator,
+  FallbackTenderlySimulator,
   IGasPriceProvider,
   IMetric,
-  Simulator,
+  // IOnChainQuoteProvider,
+  IRouteCachingProvider,
   ITokenListProvider,
+  ITokenPropertiesProvider,
   ITokenProvider,
-  // IV2PoolProvider,
-  // IV2SubgraphProvider,
   IV3PoolProvider,
   IV3SubgraphProvider,
   LegacyGasPriceProvider,
+  // MIXED_ROUTE_QUOTER_V1_ADDRESSES,
+  // NEW_QUOTER_V2_ADDRESSES,
   NodeJSCache,
   OnChainGasPriceProvider,
   OnChainQuoteProvider,
+  // QUOTER_V2_ADDRESSES,
   setGlobalLogger,
-  // StaticV2SubgraphProvider,
+  Simulator,
   StaticV3SubgraphProvider,
+  TenderlySimulator,
+  TokenPropertiesProvider,
   TokenProvider,
+  TokenValidatorProvider,
   UniswapMulticallProvider,
-  // V2PoolProvider,
-  // V2QuoteProvider,
   V3PoolProvider,
-  IRouteCachingProvider
 } from 'lampros-sor'
 import { PortionProvider } from 'lampros-sor/build/main/providers/portion-provider'
 import { TokenList } from 'udonswap-token-lists'
@@ -43,9 +46,10 @@ import { BaseRInj, Injector } from './handler'
 import { V3AWSSubgraphProvider } from './router-entities/aws-subgraph-provider'
 import { AWSTokenListProvider } from './router-entities/aws-token-list-provider'
 import { DynamoRouteCachingProvider } from './router-entities/route-caching/dynamo-route-caching-provider'
+import { OnChainTokenFeeFetcher } from 'lampros-sor/build/main/providers/token-fee-fetcher'
 
 export const SUPPORTED_CHAINS: ChainId[] = [ChainId.MODE]
-const DEFAULT_TOKEN_LIST = 'https://tokenlist-api.vercel.app/v3-tokens'
+const DEFAULT_TOKEN_LIST = 'https://udonswap-tokenlist.vercel.app/v3-tokens'
 
 export interface RequestInjected<Router> extends BaseRInj {
   chainId: ChainId
@@ -73,6 +77,8 @@ export type ContainerDependencies = {
   // v2QuoteProvider: V2QuoteProvider
   simulator: Simulator
   routeCachingProvider?: IRouteCachingProvider
+  tokenValidatorProvider: TokenValidatorProvider
+  tokenPropertiesProvider: ITokenPropertiesProvider
 }
 
 export interface ContainerInjected {
@@ -230,6 +236,18 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           new NodeJSCache(new NodeCache({ stdTTL: 180, useClones: false }))
         )
 
+        const tokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider)
+          const tokenValidatorProvider = new TokenValidatorProvider(
+            chainId,
+            multicall2Provider,
+            new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false }))
+          )
+          const tokenPropertiesProvider = new TokenPropertiesProvider(
+            chainId,
+            new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false })),
+            tokenFeeFetcher
+          )
+
         // const v2PoolProvider = new V2PoolProvider(chainId, multicall2Provider)
         const portionProvider = new PortionProvider()
         const tenderlySimulator = new TenderlySimulator(
@@ -319,6 +337,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             // v2SubgraphProvider,
             simulator,
             routeCachingProvider,
+            tokenValidatorProvider,
+            tokenPropertiesProvider,
           },
         }
       })

@@ -23,6 +23,7 @@ import { ContainerInjected, RequestInjected } from '../injector-sor'
 import { QuoteResponse, QuoteResponseSchemaJoi, V2PoolInRoute, V3PoolInRoute } from '../schema'
 import {
   DEFAULT_ROUTING_CONFIG_BY_CHAIN,
+  FEE_ON_TRANSFER_SPECIFIC_CONFIG,
   parseDeadline,
   parseSlippageTolerance,
   tokenStringToCurrency,
@@ -65,6 +66,11 @@ export class QuoteHandler extends APIGLambdaHandler<
         permitAmount,
         permitSigDeadline,
         enableUniversalRouter,
+        enableFeeOnTransferFeeFetching,
+        portionBips,
+        portionAmount,
+        portionRecipient,
+        gasToken,
       },
       requestInjected: {
         router,
@@ -79,7 +85,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       },
     } = params
     metric.putMetric(`GET_QUOTE_REQUESTED_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
-
+    console.log(portionAmount)
     // Parse user provided token address/symbol to Currency object.
     let before = Date.now()
 
@@ -168,6 +174,11 @@ export class QuoteHandler extends APIGLambdaHandler<
       ...(forceCrossProtocol ? { forceCrossProtocol } : {}),
       ...(forceMixedRoutes ? { forceMixedRoutes } : {}),
       protocols,
+      // Only when enableFeeOnTransferFeeFetching is explicitly set to true, then we
+      // override usedCachedRoutes to false. This is to ensure that we don't use
+      // accidentally override usedCachedRoutes in the normal path.
+      ...(enableFeeOnTransferFeeFetching ? FEE_ON_TRANSFER_SPECIFIC_CONFIG(enableFeeOnTransferFeeFetching) : {}),
+      ...(gasToken ? { gasToken } : {}),
     }
 
     let swapParams: SwapOptions | undefined = undefined
@@ -275,6 +286,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             type,
             routingConfig: routingConfig,
             swapParams,
+            gasToken
           },
           `Exact In Swap: Give ${amount.toExact()} ${amount.currency.symbol}, Want: ${currencyOut.symbol
           }. Chain: ${chainId}`
@@ -299,6 +311,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             type,
             routingConfig: routingConfig,
             swapParams,
+            gasToken
           },
           `Exact Out Swap: Want ${amount.toExact()} ${amount.currency.symbol} Give: ${currencyIn.symbol
           }. Chain: ${chainId}`
@@ -339,6 +352,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       methodParameters,
       blockNumber,
       simulationStatus,
+      portionAmount: outputPortionAmount,
     } = swapRoute
 
     if (simulationStatus == SimulationStatus.Failed) {
@@ -466,6 +480,10 @@ export class QuoteHandler extends APIGLambdaHandler<
       route: routeResponse,
       routeString,
       quoteId,
+      portionBips: outputPortionAmount && portionBips,
+      portionRecipient: outputPortionAmount && portionRecipient,
+      portionAmount: outputPortionAmount?.quotient.toString(),
+      portionAmountDecimals: outputPortionAmount?.toExact(),
     }
 
     metric.putMetric(`GET_QUOTE_200_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
@@ -480,7 +498,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       type,
       chainId,
       amount,
-      routeString
+      routeString,
     )
 
     return {

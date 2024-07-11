@@ -6,6 +6,8 @@ export type TokenInRoute = {
   chainId: number
   symbol: string
   decimals: string
+  buyFeeBps?: string
+  sellFeeBps?: string
 }
 
 export type V3PoolInRoute = {
@@ -60,6 +62,10 @@ export const QuoteResponseSchemaJoi = Joi.object().keys({
     value: Joi.string().required(),
     to: Joi.string().required(),
   }).optional(),
+  portionBips: Joi.number().optional(),
+  portionRecipient: Joi.string().optional(),
+  portionAmount: Joi.string().optional(),
+  portionAmountDecimals: Joi.string().optional(),
 })
 
 export type QuoteResponse = {
@@ -81,4 +87,8 @@ export type QuoteResponse = {
   route: Array<(V3PoolInRoute | V2PoolInRoute)[]>
   routeString: string
   methodParameters?: MethodParameters
+  portionBips?: number
+  portionRecipient?: string
+  portionAmount?: string
+  portionAmountDecimals?: string
 }

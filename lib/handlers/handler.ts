@@ -108,7 +108,7 @@ export abstract class APIGLambdaHandler<CInj, RInj extends BaseRInj, ReqBody, Re
     }
   }
 
-  private buildHandler(): APIGatewayProxyHandler {
+  private buildHandler(): APIGatewayProxyHandler {  
     return metricScope(
       (metric: MetricsLogger) =>
         async (event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> => {

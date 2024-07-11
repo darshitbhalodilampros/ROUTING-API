@@ -1,4 +1,4 @@
-import { Currency, Percent } from 'lampros-core'
+import { Currency, CurrencyAmount, Percent } from 'lampros-core'
 import {
   AlphaRouterConfig,
   ChainId,
@@ -9,6 +9,8 @@ import {
   nativeOnChain,
 } from 'lampros-sor'
 import Logger from 'bunyan'
+import { FeeOptions } from 'lampros-v3'
+import { FlatFeeOptions } from 'lampros-universal'
 
 export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterConfig => {
   switch (chainId) {
@@ -92,6 +94,69 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
     //     forceCrossProtocol: false,
     //   }
   }
+}
+
+export type FeeOnTransferSpecificConfig = {
+  enableFeeOnTransferFeeFetching?: boolean
+}
+
+export const FEE_ON_TRANSFER_SPECIFIC_CONFIG = (
+  enableFeeOnTransferFeeFetching?: boolean
+): FeeOnTransferSpecificConfig => {
+  return {
+    enableFeeOnTransferFeeFetching: enableFeeOnTransferFeeFetching,
+  } as FeeOnTransferSpecificConfig
+}
+
+export function parsePortionPercent(portionBips: number): Percent {
+  return new Percent(portionBips, 10_000)
+}
+
+export function parseFeeOptions(portionBips?: number, portionRecipient?: string): FeeOptions | undefined {
+  if (!portionBips || !portionRecipient) {
+    return undefined
+  }
+
+  return { fee: parsePortionPercent(portionBips), recipient: portionRecipient } as FeeOptions
+}
+
+export function parseFlatFeeOptions(portionAmount?: string, portionRecipient?: string): FlatFeeOptions | undefined {
+  if (!portionAmount || !portionRecipient) {
+    return undefined
+  }
+
+  return { amount: portionAmount, recipient: portionRecipient } as FlatFeeOptions
+}
+
+export type AllFeeOptions = {
+  fee?: FeeOptions
+  flatFee?: FlatFeeOptions
+}
+
+export function populateFeeOptions(
+  type: string,
+  portionBips?: number,
+  portionRecipient?: string,
+  portionAmount?: string
+): AllFeeOptions | undefined {
+  switch (type) {
+    case 'exactIn':
+      const feeOptions = parseFeeOptions(portionBips, portionRecipient)
+      return { fee: feeOptions }
+    case 'exactOut':
+      const flatFeeOptions = parseFlatFeeOptions(portionAmount, portionRecipient)
+      return { flatFee: flatFeeOptions }
+    default:
+      return undefined
+  }
+}
+
+export function computePortionAmount(currencyOut: CurrencyAmount<Currency>, portionBips?: number): string | undefined {
+  if (!portionBips) {
+    return undefined
+  }
+
+  return currencyOut.multiply(parsePortionPercent(portionBips)).quotient.toString()
 }
 
 export async function tokenStringToCurrency(
