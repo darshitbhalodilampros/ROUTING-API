@@ -57,6 +57,21 @@ export const QuoteQueryParamsJoi = Joi.object({
   permitSigDeadline: Joi.number().optional(),
   // TODO: Remove once universal router is no longer behind a feature flag.
   enableUniversalRouter: Joi.boolean().optional().default(false),
+  quoteSpeed: Joi.string().valid('fast', 'standard').optional().default('standard'),
+  debugRoutingConfig: Joi.string().optional(),
+  unicornSecret: Joi.string().optional(),
+  intent: Joi.string().valid('quote', 'swap', 'caching', 'pricing').optional().default('quote'),
+  enableFeeOnTransferFeeFetching: Joi.boolean().optional().default(false),
+  portionBips: Joi.string()
+    .pattern(/^[0-9]+$/)
+    .max(5) // portionBips is a string type with the expectation of being parsable to integer between 0 and 10000
+    .optional(),
+  portionAmount: Joi.string()
+    .pattern(/^[0-9]+$/)
+    .optional(),
+  portionRecipient: Joi.string().alphanum().max(42).optional(),
+  source: Joi.string().max(20).optional(),
+  gasToken: Joi.string().alphanum().max(42).optional(),
 }).and('recipient', 'slippageTolerance', 'deadline')
 
 export type QuoteQueryParams = {
@@ -82,4 +97,14 @@ export type QuoteQueryParams = {
   permitAmount?: string
   permitSigDeadline?: string
   enableUniversalRouter?: boolean
+  quoteSpeed?: string
+  debugRoutingConfig?: string
+  unicornSecret?: string
+  intent?: string
+  enableFeeOnTransferFeeFetching?: boolean
+  portionBips?: number
+  portionAmount?: string
+  portionRecipient?: string
+  source?: string
+  gasToken?: string
 }
