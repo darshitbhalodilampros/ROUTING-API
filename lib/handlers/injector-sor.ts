@@ -30,8 +30,9 @@ import {
   // V2PoolProvider,
   // V2QuoteProvider,
   V3PoolProvider,
-  IRouteCachingProvider,
+  IRouteCachingProvider
 } from 'lampros-sor'
+import { PortionProvider } from 'lampros-sor/build/main/providers/portion-provider'
 import { TokenList } from 'udonswap-token-lists'
 import { default as bunyan, default as Logger } from 'bunyan'
 import { ethers } from 'ethers'
@@ -230,7 +231,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
         )
 
         // const v2PoolProvider = new V2PoolProvider(chainId, multicall2Provider)
-
+        const portionProvider = new PortionProvider()
         const tenderlySimulator = new TenderlySimulator(
           chainId,
           'http://api.tenderly.co',
@@ -240,12 +241,13 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           // v2PoolProvider,
           v3PoolProvider,
           provider,
+          portionProvider,
           { [ChainId.MODE]: 2.5 }
         )
 
-        const ethEstimateGasSimulator = new EthEstimateGasSimulator(chainId, provider, v3PoolProvider)
+        const ethEstimateGasSimulator = new EthEstimateGasSimulator(chainId, provider, v3PoolProvider, portionProvider)
 
-        const simulator = new FallbackTenderlySimulator(chainId, provider, tenderlySimulator, ethEstimateGasSimulator)
+        const simulator = new FallbackTenderlySimulator(chainId, provider,portionProvider, tenderlySimulator, ethEstimateGasSimulator)
 
         const [v3SubgraphProvider] = await Promise.all([
           (async () => {
