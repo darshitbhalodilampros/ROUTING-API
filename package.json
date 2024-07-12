@@ -93,7 +93,7 @@
     "http-json-errors": "^1.2.10",
     "lampros-core": "0.0.1",
     "lampros-router": "0.0.1",
-    "lampros-sor": "0.0.6",
+    "lampros-sor": "0.0.7",
     "lampros-universal": "0.0.2",
     "lampros-v3": "0.0.1",
     "lodash": "^4.17.21",

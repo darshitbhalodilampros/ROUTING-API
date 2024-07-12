@@ -33,7 +33,6 @@ import { utils } from 'ethers'
 import { simulationStatusToString } from './util/simulation'
 import Logger from 'bunyan'
 import { PAIRS_TO_TRACK } from './util/pairs-to-track'
-import { info } from 'console'
 
 export class QuoteHandler extends APIGLambdaHandler<
   ContainerInjected,
