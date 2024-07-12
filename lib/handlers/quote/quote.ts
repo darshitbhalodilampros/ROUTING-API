@@ -33,6 +33,7 @@ import { utils } from 'ethers'
 import { simulationStatusToString } from './util/simulation'
 import Logger from 'bunyan'
 import { PAIRS_TO_TRACK } from './util/pairs-to-track'
+import { info } from 'console'
 
 export class QuoteHandler extends APIGLambdaHandler<
   ContainerInjected,
@@ -486,6 +487,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       portionAmountDecimals: outputPortionAmount?.toExact(),
     }
 
+    console.log(result)
     metric.putMetric(`GET_QUOTE_200_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
 
     this.logRouteMetrics(
