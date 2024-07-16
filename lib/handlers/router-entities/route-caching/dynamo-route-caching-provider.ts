@@ -404,7 +404,6 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
         PutRequest: {
           Item: {
             pairTradeTypeChainId: partitionKey.toString(),
-            routeId: route.routeId,
             blockNumber: cachedRoutes.blockNumber,
             protocol: route.protocol.toString(),
             item: binaryCachedRoutes,
