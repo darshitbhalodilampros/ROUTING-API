@@ -7954,10 +7954,10 @@ lampros-router@1.0.0:
     lampros-core "1.0.0"
     lampros-v3 "1.0.0"
 
-lampros-sor@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/lampros-sor/-/lampros-sor-1.0.0.tgz#f6944d91be58fc84a5bbb8003bb62f924746168f"
-  integrity sha512-sql2c1p2nAXOQ9VI9sx4TmqsgDvylFbZIeuVsoq9r09OUHhrkEomFpYvbAPcKauFGEbJntzoMFR/B5UWt7gUnQ==
+lampros-sor@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/lampros-sor/-/lampros-sor-1.0.1.tgz#91d4fc6ca5f9cfa5911c62a2368fb34441660f2f"
+  integrity sha512-zYQr+M9cWuCI5iMvxzvOcwf5pzm6PE0v/SS0rG61N2TXADzPTtYol8XPPNFYXsYYTOqyyhaDZUBNrS4l3vombg==
   dependencies:
     "@uniswap/permit2-sdk" "^1.2.0"
     "@uniswap/swap-router-contracts" "^1.3.0"
