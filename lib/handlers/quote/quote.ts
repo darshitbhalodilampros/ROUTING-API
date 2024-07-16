@@ -135,7 +135,6 @@ export class QuoteHandler extends APIGLambdaHandler<
         enableUniversalRouter,
         quoteSpeed,
         debugRoutingConfig,
-        unicornSecret,
         intent,
         enableFeeOnTransferFeeFetching,
         portionBips,
@@ -235,7 +234,7 @@ export class QuoteHandler extends APIGLambdaHandler<
     }
 
     let parsedDebugRoutingConfig = {}
-    if (debugRoutingConfig && unicornSecret && unicornSecret === process.env.UNICORN_SECRET) {
+    if (debugRoutingConfig ) {
       parsedDebugRoutingConfig = JSON.parse(debugRoutingConfig)
     }
 

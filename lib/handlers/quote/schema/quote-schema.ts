@@ -59,7 +59,6 @@ export const QuoteQueryParamsJoi = Joi.object({
   enableUniversalRouter: Joi.boolean().optional().default(false),
   quoteSpeed: Joi.string().valid('fast', 'standard').optional().default('standard'),
   debugRoutingConfig: Joi.string().optional(),
-  unicornSecret: Joi.string().optional(),
   intent: Joi.string().valid('quote', 'swap', 'caching', 'pricing').optional().default('quote'),
   enableFeeOnTransferFeeFetching: Joi.boolean().optional().default(false),
   portionBips: Joi.string()
@@ -97,7 +96,6 @@ export type QuoteQueryParams = {
   enableUniversalRouter?: boolean
   quoteSpeed?: string
   debugRoutingConfig?: string
-  unicornSecret?: string
   intent?: string
   enableFeeOnTransferFeeFetching?: boolean
   portionBips?: number

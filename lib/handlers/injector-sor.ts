@@ -47,9 +47,9 @@ import { AWSTokenListProvider } from './router-entities/aws-token-list-provider'
 import { DynamoRouteCachingProvider } from './router-entities/route-caching/dynamo-route-caching-provider'
 import { DynamoDBCachingV3PoolProvider } from './pools/pool-caching/v3/dynamo-caching-pool-provider'
 import { TrafficSwitchV3PoolProvider } from './pools/provider-migration/v3/traffic-switch-v3-pool-provider'
-import { DefaultEVMClient } from './evm/EVMClient'
-import { InstrumentedEVMProvider } from './evm/provider/InstrumentedEVMProvider'
-import { deriveProviderName } from './evm/provider/ProviderName'
+// import { DefaultEVMClient } from './evm/EVMClient'
+// import { InstrumentedEVMProvider } from './evm/provider/InstrumentedEVMProvider'
+// import { deriveProviderName } from './evm/provider/ProviderName'
 // import { V2DynamoCache } from './pools/pool-caching/v2/v2-dynamo-cache'
 import { OnChainTokenFeeFetcher } from 'lampros-sor/build/main/providers/token-fee-fetcher'
 import { PortionProvider } from 'lampros-sor/build/main/providers/portion-provider'
@@ -71,7 +71,7 @@ export const SUPPORTED_CHAINS: ChainId[] = [
   // ChainId.BASE,
   ChainId.MODE
 ]
-const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
+const DEFAULT_TOKEN_LIST = 'https://udonswap-tokenlist.vercel.app/v3-tokens'
 
 export interface RequestInjected<Router> extends BaseRInj {
   chainId: ChainId
@@ -163,18 +163,13 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               break
           }
 
-          const provider = new DefaultEVMClient({
-            allProviders: [
-              new InstrumentedEVMProvider({
-                url: {
-                  url: url,
-                  timeout,
-                },
-                network: chainId,
-                name: deriveProviderName(url),
-              }),
-            ],
-          }).getProvider()
+          const provider = new ethers.providers.JsonRpcProvider(
+            {
+              url: url,
+              timeout,
+            },
+            chainId
+          )
 
           const tokenCache = new NodeJSCache<Token>(new NodeCache({ stdTTL: 3600, useClones: false }))
           const blockedTokenCache = new NodeJSCache<Token>(new NodeCache({ stdTTL: 3600, useClones: false }))

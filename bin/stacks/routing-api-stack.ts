@@ -1,6 +1,6 @@
 import { SUPPORTED_CHAINS } from 'lampros-sor'
 import * as cdk from 'aws-cdk-lib'
-// import { ChainId } from 'lampros-core'
+import { ChainId } from 'lampros-core'
 import { CfnOutput, Duration } from 'aws-cdk-lib'
 import * as aws_apigateway from 'aws-cdk-lib/aws-apigateway'
 import { MethodLoggingLevel } from 'aws-cdk-lib/aws-apigateway'
@@ -17,7 +17,8 @@ import { RoutingDashboardStack } from './routing-dashboard-stack'
 import { RoutingLambdaStack } from './routing-lambda-stack'
 import { RoutingDatabaseStack } from './routing-database-stack'
 
-// export const CHAINS_NOT_MONITORED: ChainId[] = [ChainId.GOERLI, ChainId.POLYGON_MUMBAI]
+export const CHAINS_NOT_MONITORED: ChainId[] = [
+]
 
 export class RoutingAPIStack extends cdk.Stack {
   public readonly url: CfnOutput
@@ -32,7 +33,6 @@ export class RoutingAPIStack extends cdk.Stack {
       ethGasStationInfoUrl: string
       chatbotSNSArn?: string
       stage: string
-      internalApiKey?: string
       route53Arn?: string
       pinata_key?: string
       pinata_secret?: string
@@ -40,7 +40,6 @@ export class RoutingAPIStack extends cdk.Stack {
       tenderlyUser: string
       tenderlyProject: string
       tenderlyAccessKey: string
-      unicornSecret: string
     }
   ) {
     super(parent, name, props)
@@ -52,7 +51,6 @@ export class RoutingAPIStack extends cdk.Stack {
       ethGasStationInfoUrl,
       chatbotSNSArn,
       stage,
-      internalApiKey,
       route53Arn,
       pinata_key,
       pinata_secret,
@@ -60,7 +58,6 @@ export class RoutingAPIStack extends cdk.Stack {
       tenderlyUser,
       tenderlyProject,
       tenderlyAccessKey,
-      unicornSecret,
     } = props
 
     const {
@@ -78,17 +75,9 @@ export class RoutingAPIStack extends cdk.Stack {
       pinata_secret,
       hosted_zone,
     })
-
-    const {
-      routesDynamoDb,
-      routesDbCachingRequestFlagDynamoDb,
-      cachedRoutesDynamoDb,
-      cachingRequestFlagDynamoDb,
-      cachedV3PoolsDynamoDb,
-      cachedV2PairsDynamoDb,
-      tokenPropertiesCachingDynamoDb,
-    } = new RoutingDatabaseStack(this, 'RoutingDatabaseStack', {})
-
+    
+    const { cachedRoutesDynamoDb } = new RoutingDatabaseStack(this, 'RoutingDatabaseStack', {})
+    
     const { routingLambda, routingLambdaAlias } = new RoutingLambdaStack(this, 'RoutingLambdaStack', {
       poolCacheBucket,
       poolCacheBucket2,
@@ -101,14 +90,7 @@ export class RoutingAPIStack extends cdk.Stack {
       tenderlyUser,
       tenderlyProject,
       tenderlyAccessKey,
-      routesDynamoDb,
-      routesDbCachingRequestFlagDynamoDb,
       cachedRoutesDynamoDb,
-      cachingRequestFlagDynamoDb,
-      cachedV3PoolsDynamoDb,
-      cachedV2PairsDynamoDb,
-      tokenPropertiesCachingDynamoDb,
-      unicornSecret,
     })
 
     const accessLogGroup = new aws_logs.LogGroup(this, 'RoutingAPIGAccessLogs')
@@ -168,27 +150,6 @@ export class RoutingAPIStack extends cdk.Stack {
                 headerName: 'X-Forwarded-For',
                 fallbackBehavior: 'MATCH',
               },
-              scopeDownStatement: {
-                notStatement: {
-                  statement: {
-                    byteMatchStatement: {
-                      fieldToMatch: {
-                        singleHeader: {
-                          name: 'x-api-key',
-                        },
-                      },
-                      positionalConstraint: 'EXACTLY',
-                      searchString: internalApiKey,
-                      textTransformations: [
-                        {
-                          type: 'NONE',
-                          priority: 0,
-                        },
-                      ],
-                    },
-                  },
-                },
-              },
             },
           },
           action: {
@@ -238,11 +199,9 @@ export class RoutingAPIStack extends cdk.Stack {
       alarmName: 'RoutingAPI-SEV2-5XX',
       metric: api.metricServerError({
         period: Duration.minutes(5),
-        // For this metric 'avg' represents error rate.
         statistic: 'avg',
       }),
       threshold: 0.02,
-      // Beta has much less traffic so is more susceptible to transient errors.
       evaluationPeriods: stage == STAGE.BETA ? 5 : 3,
     })
 
@@ -250,11 +209,9 @@ export class RoutingAPIStack extends cdk.Stack {
       alarmName: 'RoutingAPI-SEV3-5XX',
       metric: api.metricServerError({
         period: Duration.minutes(5),
-        // For this metric 'avg' represents error rate.
         statistic: 'avg',
       }),
       threshold: 0.01,
-      // Beta has much less traffic so is more susceptible to transient errors.
       evaluationPeriods: stage == STAGE.BETA ? 5 : 3,
     })
 

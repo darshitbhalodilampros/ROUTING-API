@@ -4,7 +4,7 @@ import {
   CacheMode,
   ITokenListProvider,
   ITokenProvider,
-  LowerCaseStringArray,
+  // LowerCaseStringArray,
   // MapWithLowerCaseKey,
   NATIVE_NAMES_BY_ID,
   nativeOnChain,
@@ -80,9 +80,6 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
           topNDirectSwaps: 1,
           topNTokenInOut: 5,
           topNSecondHop: 2,
-          tokensToAvoidOnSecondHops: new LowerCaseStringArray(
-            '0xd46ba6d942050d489dbd938a2c909a5d5039a161' // AMPL on Mainnet
-          ),
           topNWithEachBaseToken: 2,
           topNWithBaseToken: 6,
         },

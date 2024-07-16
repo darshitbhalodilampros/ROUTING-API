@@ -26,7 +26,6 @@ export class RoutingAPIStage extends Stage {
       ethGasStationInfoUrl: string
       chatbotSNSArn?: string
       stage: string
-      internalApiKey?: string
       route53Arn?: string
       pinata_key?: string
       pinata_secret?: string
@@ -34,7 +33,6 @@ export class RoutingAPIStage extends Stage {
       tenderlyUser: string
       tenderlyProject: string
       tenderlyAccessKey: string
-      unicornSecret: string
     }
   ) {
     super(scope, id, props)
@@ -44,7 +42,6 @@ export class RoutingAPIStage extends Stage {
       ethGasStationInfoUrl,
       chatbotSNSArn,
       stage,
-      internalApiKey,
       route53Arn,
       pinata_key,
       pinata_secret,
@@ -52,7 +49,6 @@ export class RoutingAPIStage extends Stage {
       tenderlyUser,
       tenderlyProject,
       tenderlyAccessKey,
-      unicornSecret,
     } = props
 
     const { url } = new RoutingAPIStack(this, 'RoutingAPI', {
@@ -61,7 +57,6 @@ export class RoutingAPIStage extends Stage {
       ethGasStationInfoUrl,
       chatbotSNSArn,
       stage,
-      internalApiKey,
       route53Arn,
       pinata_key,
       pinata_secret,
@@ -69,7 +64,6 @@ export class RoutingAPIStage extends Stage {
       tenderlyUser,
       tenderlyProject,
       tenderlyAccessKey,
-      unicornSecret,
     })
     this.url = url
   }
@@ -127,10 +121,6 @@ export class RoutingAPIPipeline extends Stack {
     })
 
     // Secret that controls the access to the debugging query string params
-    const unicornSecrets = sm.Secret.fromSecretAttributes(this, 'DebugConfigUnicornSecrets', {
-      secretCompleteArn: 'arn:aws:secretsmanager:us-east-2:644039819003:secret:debug-config-unicornsecrets-jvmCsq',
-    })
-
     const tenderlyCreds = sm.Secret.fromSecretAttributes(this, 'TenderlyCreds', {
       secretCompleteArn: 'arn:aws:secretsmanager:us-east-2:644039819003:secret:tenderly-api-wQaI2R',
     })
@@ -154,10 +144,6 @@ export class RoutingAPIPipeline extends Stack {
       secretCompleteArn: 'arn:aws:secretsmanager:us-east-2:644039819003:secret:hosted-zone-JmPDNV',
     })
 
-    const internalApiKey = sm.Secret.fromSecretAttributes(this, 'internal-api-key', {
-      secretCompleteArn: 'arn:aws:secretsmanager:us-east-2:644039819003:secret:routing-api-internal-api-key-Z68NmB',
-    })
-
     // Parse AWS Secret
     let jsonRpcProviders = {} as { [chainId: string]: string }
     SUPPORTED_CHAINS.forEach((chainId: ChainId) => {
@@ -170,7 +156,6 @@ export class RoutingAPIPipeline extends Stack {
     const betaUsEast2Stage = new RoutingAPIStage(this, 'beta-us-east-2', {
       env: { account: '145079444317', region: 'us-east-2' },
       jsonRpcProviders: jsonRpcProviders,
-      internalApiKey: internalApiKey.secretValue.toString(),
       provisionedConcurrency: 10,
       ethGasStationInfoUrl: ethGasStationInfoUrl.secretValue.toString(),
       stage: STAGE.BETA,
@@ -181,7 +166,6 @@ export class RoutingAPIPipeline extends Stack {
       tenderlyUser: tenderlyCreds.secretValueFromJson('tenderly-user').toString(),
       tenderlyProject: tenderlyCreds.secretValueFromJson('tenderly-project').toString(),
       tenderlyAccessKey: tenderlyCreds.secretValueFromJson('tenderly-access-key').toString(),
-      unicornSecret: unicornSecrets.secretValueFromJson('debug-config-unicorn-key').toString(),
     })
 
     const betaUsEast2AppStage = pipeline.addStage(betaUsEast2Stage)
@@ -192,7 +176,6 @@ export class RoutingAPIPipeline extends Stack {
     const prodUsEast2Stage = new RoutingAPIStage(this, 'prod-us-east-2', {
       env: { account: '606857263320', region: 'us-east-2' },
       jsonRpcProviders: jsonRpcProviders,
-      internalApiKey: internalApiKey.secretValue.toString(),
       provisionedConcurrency: 1000,
       ethGasStationInfoUrl: ethGasStationInfoUrl.secretValue.toString(),
       chatbotSNSArn: 'arn:aws:sns:us-east-2:644039819003:SlackChatbotTopic',
@@ -204,7 +187,6 @@ export class RoutingAPIPipeline extends Stack {
       tenderlyUser: tenderlyCreds.secretValueFromJson('tenderly-user').toString(),
       tenderlyProject: tenderlyCreds.secretValueFromJson('tenderly-project').toString(),
       tenderlyAccessKey: tenderlyCreds.secretValueFromJson('tenderly-access-key').toString(),
-      unicornSecret: unicornSecrets.secretValueFromJson('debug-config-unicorn-key').toString(),
     })
 
     const prodUsEast2AppStage = pipeline.addStage(prodUsEast2Stage)
@@ -263,24 +245,7 @@ export class RoutingAPIPipeline extends Stack {
 const app = new cdk.App()
 
 const jsonRpcProviders = {
-  WEB3_RPC_1: process.env.JSON_RPC_PROVIDER_1!,
-  WEB3_RPC_3: process.env.JSON_RPC_PROVIDER_3!,
-  WEB3_RPC_4: process.env.JSON_RPC_PROVIDER_4!,
-  WEB3_RPC_5: process.env.JSON_RPC_PROVIDER_5!,
-  WEB3_RPC_42: process.env.JSON_RPC_PROVIDER_42!,
-  WEB3_RPC_10: process.env.JSON_RPC_PROVIDER_10!,
-  WEB3_RPC_69: process.env.JSON_RPC_PROVIDER_69!,
-  WEB3_RPC_42161: process.env.JSON_RPC_PROVIDER_42161!,
-  WEB3_RPC_421611: process.env.JSON_RPC_PROVIDER_421611!,
-  WEB3_RPC_11155111: process.env.JSON_RPC_PROVIDER_11155111!,
-  WEB3_RPC_421613: process.env.JSON_RPC_PROVIDER_421613!,
-  WEB3_RPC_137: process.env.JSON_RPC_PROVIDER_137!,
-  WEB3_RPC_80001: process.env.JSON_RPC_PROVIDER_80001!,
-  WEB3_RPC_42220: process.env.JSON_RPC_PROVIDER_42220!,
-  WEB3_RPC_44787: process.env.JSON_RPC_PROVIDER_44787!,
-  WEB3_RPC_56: process.env.JSON_RPC_PROVIDER_56!,
-  WEB3_RPC_43114: process.env.JSON_RPC_PROVIDER_43114!,
-  WEB3_RPC_8453: process.env.JSON_RPC_PROVIDER_8453!,
+  WEB3_RPC_919: process.env.JSON_RPC_PROVIDER_919!,
 }
 
 // Local dev stack
@@ -291,7 +256,6 @@ new RoutingAPIStack(app, 'RoutingAPIStack', {
   ethGasStationInfoUrl: process.env.ETH_GAS_STATION_INFO_URL!,
   chatbotSNSArn: process.env.CHATBOT_SNS_ARN,
   stage: STAGE.LOCAL,
-  internalApiKey: 'test-api-key',
   route53Arn: process.env.ROLE_ARN,
   pinata_key: process.env.PINATA_API_KEY!,
   pinata_secret: process.env.PINATA_API_SECRET!,
@@ -299,7 +263,6 @@ new RoutingAPIStack(app, 'RoutingAPIStack', {
   tenderlyUser: process.env.TENDERLY_USER!,
   tenderlyProject: process.env.TENDERLY_PROJECT!,
   tenderlyAccessKey: process.env.TENDERLY_ACCESS_KEY!,
-  unicornSecret: process.env.UNICORN_SECRET!,
 })
 
 new RoutingAPIPipeline(app, 'RoutingAPIPipelineStack', {
