@@ -120,6 +120,9 @@ export async function tokenStringToCurrency(
   if (NATIVE_NAMES_BY_ID[chainId]!.includes(tokenRaw)) {
     token = nativeOnChain(chainId)
   } else if (isAddress(tokenRaw)) {
+    log.info(tokenListProvider)
+    const tokenlog = tokenListProvider.getTokenByAddress(tokenRaw)
+    log.info(tokenlog)
     token = await tokenListProvider.getTokenByAddress(tokenRaw)
   }
 
