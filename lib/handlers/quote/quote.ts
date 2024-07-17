@@ -57,7 +57,7 @@ export class QuoteHandler extends APIGLambdaHandler<
 
     try {
       result = await this.handleRequestInternal(params)
-
+      console.log("result",result)
       switch (result.statusCode) {
         case 200:
         case 202:
