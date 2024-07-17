@@ -21,6 +21,7 @@ import { FlatFeeOptions } from 'lampros-universal'
 export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterConfig => {
   switch (chainId) {
     case ChainId.MODE:
+    default:
       return {
         v2PoolSelection: {
           topN: 3,
@@ -44,31 +45,6 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
         distributionPercent: 10,
         forceCrossProtocol: false,
       }
-      break
-    default:
-      return {
-        v2PoolSelection: {
-          topN: 3,
-          topNDirectSwaps: 1,
-          topNTokenInOut: 5,
-          topNSecondHop: 2,
-          topNWithEachBaseToken: 2,
-          topNWithBaseToken: 6,
-        },
-        v3PoolSelection: {
-          topN: 2,
-          topNDirectSwaps: 2,
-          topNTokenInOut: 3,
-          topNSecondHop: 1,
-          topNWithEachBaseToken: 3,
-          topNWithBaseToken: 5,
-        },
-        maxSwapsPerPath: 3,
-        minSplits: 1,
-        maxSplits: 7,
-        distributionPercent: 5,
-        forceCrossProtocol: false,
-      }
   }
 }
 
@@ -84,26 +60,6 @@ export type QuoteSpeedConfig = {
 export const QUOTE_SPEED_CONFIG: { [key: string]: QuoteSpeedConfig } = {
   standard: {},
   fast: {
-    v2PoolSelection: {
-      topN: 1,
-      topNDirectSwaps: 1,
-      topNTokenInOut: 1,
-      topNSecondHop: 0,
-      topNWithEachBaseToken: 1,
-      topNWithBaseToken: 1,
-    },
-    v3PoolSelection: {
-      topN: 1,
-      topNDirectSwaps: 1,
-      topNTokenInOut: 1,
-      topNSecondHop: 0,
-      topNWithEachBaseToken: 1,
-      topNWithBaseToken: 1,
-    },
-    maxSwapsPerPath: 2,
-    maxSplits: 1,
-    distributionPercent: 100,
-    writeToCachedRoutes: false,
   },
 }
 
