@@ -1,3 +1,5 @@
+import { QuoteToRatioHandlerInjector } from './quote-to-ratio/injector'
+import { QuoteToRatioHandler } from './quote-to-ratio/quote-to-ratio'
 import { QuoteHandlerInjector } from './quote/injector'
 import { QuoteHandler } from './quote/quote'
 import { default as bunyan, default as Logger } from 'bunyan'
@@ -17,6 +19,16 @@ try {
   throw error
 }
 
+let quoteToRatioHandler: QuoteToRatioHandler
+try {
+  const quoteToRatioInjectorPromise = new QuoteToRatioHandlerInjector('quoteToRatioInjector').build()
+  quoteToRatioHandler = new QuoteToRatioHandler('quote-to-ratio', quoteToRatioInjectorPromise)
+} catch (error) {
+  log.fatal({ error }, 'Fatal error')
+  throw error
+}
+
 module.exports = {
   quoteHandler: quoteHandler.handler,
+  quoteToRatioHandler: quoteToRatioHandler.handler
 }

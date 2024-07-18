@@ -20,7 +20,7 @@ import JSBI from 'jsbi'
 import _ from 'lodash'
 import { APIGLambdaHandler, ErrorResponse, HandleRequestParams, Response } from '../handler'
 import { ContainerInjected, RequestInjected } from '../injector-sor'
-import { QuoteResponse, QuoteResponseSchemaJoi, V3PoolInRoute } from '../schema'
+import { QuoteResponse, QuoteResponseSchemaJoi, V2PoolInRoute, V3PoolInRoute } from '../schema'
 import {
   DEFAULT_ROUTING_CONFIG_BY_CHAIN,
   parseDeadline,
@@ -456,13 +456,13 @@ export class QuoteHandler extends APIGLambdaHandler<
       metric.putMetric('SimulationNotSupported', 1, MetricLoggerUnit.Count)
     }
 
-    const routeResponse: Array<(V3PoolInRoute)[]> = []
+    const routeResponse: Array<(V3PoolInRoute | V2PoolInRoute)[]> = []
 
     for (const subRoute of route) {
       const { amount, quote, tokenPath } = subRoute
 
       const pools = subRoute.route.pools
-      const curRoute: (V3PoolInRoute)[] = []
+      const curRoute: (V3PoolInRoute | V2PoolInRoute)[] = []
       for (let i = 0; i < pools.length; i++) {
         const nextPool = pools[i]
         const tokenIn = tokenPath[i]
